@@ -1,16 +1,18 @@
-import { USER_LOGIN, USER_LOGOUT } from '../actions/UserActions'
+import { USER_LOGIN, USER_LOGOUT } from "../actions/UserActions"
 
 const initialState = {
   isLoggedIn: false,
+  name: "",
 }
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case USER_LOGIN: {
-      const { name = 'anon' } = action.payload
+      const name = action.payload
+      // console.log("userReducer: USER_LOGIN: name: ", name)
       return {
         isLoggedIn: true,
-        name,
+        name: name,
       }
     }
     case USER_LOGOUT: {
@@ -23,5 +25,4 @@ const userReducer = (state = initialState, action) => {
     }
   }
 }
-
 export default userReducer

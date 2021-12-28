@@ -10,13 +10,6 @@ const firebaseConfig = {
   measurementId: "G-R3Q6Q68HBT"
 }
 
-let app
-
-if (!firebase.apps.length) {
-  app = firebase.initializeApp(firebaseConfig)
-} else {
-  app = firebase.app(); // if already initialized, use that one
-}
-
+export const app = firebase.initializeApp(firebaseConfig)
 export const auth = app.auth()
 export const db = app.database()

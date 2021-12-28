@@ -1,26 +1,35 @@
-import * as React from "react"
+import React, { useCallback } from "react"
 import {
   Box,
+  Button,
+  Center,
   Heading,
-  VStack,
   HStack,
   Input,
-  Button,
   Link,
-  Center,
+  VStack,
   Text,
 } from "native-base"
-import { useNavigation } from "@react-navigation/core"
 import { Formik } from "formik"
+import { useNavigation } from "@react-navigation/core"
 import * as yup from "yup"
+
 import { auth } from "../../utlis/Fireabase"
 
-export const SignUpScreen = () => {
-  const navigation = useNavigation()
+import { USER_LOGIN } from "../../redux/actions/UserActions"
+import { useDispatch } from "react-redux"
+
+export const LoginScreen = () => {
+  const navigation = useNavigation<any>()
+
+  const dispatch = useDispatch()
+
+  const updateUser = useCallback(
+    (user) => dispatch({ type: USER_LOGIN, payload: user }),
+    [dispatch]
+  )
+
   const loginValidationSchema = yup.object().shape({
-    name: yup
-      .string()
-      .min(8, ({ min }) => `Name must be at least ${min} characters`),
     email: yup
       .string()
       .email("Please enter valid email")
@@ -31,54 +40,50 @@ export const SignUpScreen = () => {
       .required("Password is required"),
   })
 
-  const handleSignup = async (value, actions) => {
-    const { name, email, password } = value
-    // console.log({ value })
+  const handleLogIn = async (value, actions) => {
+    const { email, password } = value
     try {
-      const response = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      )
-      response.user.updateProfile({
-        displayName: name,
-      })
-      // Navigate to homepage
-      navigation.navigate("Home")
+      const response = await auth.signInWithEmailAndPassword(email, password)
+
+      //updating redux store
+      // console.log(response)
+      updateUser(response.user.displayName)
     } catch (error) {
+      console.log(error)
       actions.setFieldError("general", error.message)
-      // console.log(error)
     }
   }
 
   return (
     <Center flex={1} px="3">
-      <Box safeArea p="2" w="90%" maxW="290" py="8">
+      <Box safeArea p="2" py="8" w="90%" maxW="290">
         <Heading
           size="lg"
+          fontWeight="600"
           color="coolGray.800"
           _dark={{
             color: "warmGray.50",
           }}
-          fontWeight="semibold"
         >
           Welcome
         </Heading>
         <Heading
           mt="1"
-          color="coolGray.600"
           _dark={{
             color: "warmGray.200",
           }}
+          color="coolGray.600"
           fontWeight="medium"
           size="xs"
         >
-          Sign up to continue!
+          Sign in to continue!
         </Heading>
-        <VStack mt={4} space={3}>
+
+        <VStack space={3} mt="5">
           <Formik
-            initialValues={{ name: "", email: "", password: "" }}
+            initialValues={{ email: "", password: "" }}
             onSubmit={(value, actions) => {
-              handleSignup(value, actions)
+              handleLogIn(value, actions)
             }}
             validationSchema={loginValidationSchema}
           >
@@ -91,27 +96,15 @@ export const SignUpScreen = () => {
               touched,
               values,
             }) => (
-              <VStack space={3}>
+              <VStack space={2}>
                 <Input
-                  name="name"
-                  placeholder="Name"
-                  onChangeText={handleChange("name")}
-                  onBlur={handleBlur("name")}
-                  value={values.name}
-                />
-                {errors.name && touched.name && (
-                  <Text style={{ fontSize: 10, color: "red" }}>
-                    {errors.name}
-                  </Text>
-                )}
-
-                <Input
-                  name="email"
+                  // name="email"
                   placeholder="Email"
                   onChangeText={handleChange("email")}
                   onBlur={handleBlur("email")}
                   value={values.email}
                   keyboardType="email-address"
+                  caretHidden={false}
                 />
                 {errors.email && touched.email && (
                   <Text style={{ fontSize: 10, color: "red" }}>
@@ -119,12 +112,13 @@ export const SignUpScreen = () => {
                   </Text>
                 )}
                 <Input
-                  name="password"
+                  // name="password"
                   placeholder="Password"
                   onChangeText={handleChange("password")}
                   onBlur={handleBlur("password")}
                   value={values.password}
                   secureTextEntry
+                  caretHidden={false}
                 />
                 {errors.password && touched.password && (
                   <Text style={{ fontSize: 10, color: "red" }}>
@@ -135,10 +129,10 @@ export const SignUpScreen = () => {
                 <Button
                   mt="2"
                   colorScheme="indigo"
-                  onPress={handleSubmit}
+                  onPress={() => handleSubmit()}
                   disabled={!isValid}
                 >
-                  Sign Up
+                  Sign in
                 </Button>
               </VStack>
             )}
@@ -151,7 +145,7 @@ export const SignUpScreen = () => {
                 color: "warmGray.200",
               }}
             >
-              Already have an account ?{" "}
+              I'm a new user.{" "}
             </Text>
             <Link
               _text={{
@@ -159,9 +153,9 @@ export const SignUpScreen = () => {
                 fontWeight: "medium",
                 fontSize: "sm",
               }}
-              onPress={() => navigation.navigate("LogIn")}
+              onPress={() => navigation.navigate("SignUp")}
             >
-              LogIn
+              Sign Up
             </Link>
           </HStack>
         </VStack>
@@ -169,5 +163,4 @@ export const SignUpScreen = () => {
     </Center>
   )
 }
-
-export default SignUpScreen
+export default LoginScreen
