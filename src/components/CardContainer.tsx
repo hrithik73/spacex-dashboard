@@ -3,7 +3,11 @@ import { Box, Text, VStack, HStack, FlatList } from "native-base"
 
 import Card from "../components/Card"
 
-const CardContainer = ({ data }) => {
+interface Props {
+  data: any
+}
+
+const CardContainer = ({ data }: Props) => {
   return (
     <Box flex={1}>
       <FlatList

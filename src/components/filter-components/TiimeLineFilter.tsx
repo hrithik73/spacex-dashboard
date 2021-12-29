@@ -27,7 +27,7 @@ const TimeLineFilter = ({
       >
         <Select.Item label="All Launches 🚀 " value="All" />
         <Select.Item label="Upcoming Launches 🚀 " value="upcoming" />
-        <Select.Item label="Past Launches  🚀 " value="past " />
+        <Select.Item label="Past Launches  🚀 " value="past" />
       </Select>
     </VStack>
   )

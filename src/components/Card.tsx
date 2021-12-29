@@ -13,7 +13,11 @@ import { EvilIcons } from "@expo/vector-icons"
 
 import ModalCard from "./ModalCard"
 
-const Card = ({ data }) => {
+interface Props {
+  data: any
+}
+
+const Card = ({ data }: Props) => {
   const [showModal, setShowModal] = useState(false)
 
   return (
@@ -74,6 +78,7 @@ const Card = ({ data }) => {
         borderTopRadius={30}
         size="md"
         top={20}
+        pt={20}
         bg={"green.100"}
       >
         <ModalCard data={data} />

@@ -1,40 +1,43 @@
-import React, { useEffect } from "react"
-import { Box, Text, HStack, Spinner, Heading, Center } from "native-base"
+import React, { useEffect, useState } from "react"
+import { Box } from "native-base"
 
 import CardContainer from "../components/CardContainer"
-import TimeLineFilter from "../components/filter-components/TiimeLineFilter"
 import FilterByDate from "../components/filter-components/FilterByDate"
+import Loading from "../components/Loading"
+import TimeLineFilter from "../components/filter-components/TiimeLineFilter"
 import { useFetch } from "../hooks/useFetch"
+import { initEndDate, initStartDate } from "../utlis/utils"
 
 const HomeScreen = () => {
-  const [selectedTimeLine, setSelectedTimeLine] = React.useState("All")
-  const { data, loading } = useFetch(selectedTimeLine)
-  // console.log(selectedTimeLine)
-  // console.log(data)
+  const [selectedTimeLine, setSelectedTimeLine] = useState("All")
+  const { data, loading, fetchData } = useFetch()
+  const [startDate, setStartDate] = useState(initStartDate)
+  const [endDate, setEndDate] = useState(initEndDate)
+
+  const [flag, setFlag] = useState(false)
+  console.log(data)
 
   useEffect(() => {
-    console.log("re-render")
-  }, [data])
+    fetchData(selectedTimeLine, startDate, endDate)
+  }, [selectedTimeLine, flag])
 
-  if (loading)
-    return (
-      <Center pt={10} mt={10}>
-        <HStack space={2} alignItems="center">
-          <Spinner accessibilityLabel="Loading posts" />
-          <Heading color="primary.500" fontSize="md">
-            Loading
-          </Heading>
-        </HStack>
-      </Center>
-    )
   return (
     <Box flex={1}>
       <TimeLineFilter
         selectedTimeLine={selectedTimeLine}
         onPress={setSelectedTimeLine}
       />
-      <FilterByDate selectedTimeLine={selectedTimeLine} />
-      <CardContainer data={data} />
+      <FilterByDate
+        startDate={startDate}
+        endDate={endDate}
+        setStartDate={setStartDate}
+        setEndDate={setEndDate}
+        flag={flag}
+        setFlag={setFlag}
+        selectedTimeLine={selectedTimeLine}
+      />
+
+      {loading ? <Loading /> : <CardContainer data={data} />}
     </Box>
   )
 }

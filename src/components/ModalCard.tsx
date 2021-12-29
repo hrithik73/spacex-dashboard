@@ -4,7 +4,7 @@ import {
   Button,
   Heading,
   HStack,
-  VStack,
+  Image,
   Modal,
   Text,
   Stack,
@@ -12,11 +12,22 @@ import {
 
 import { EvilIcons } from "@expo/vector-icons"
 
-const MoalCard = ({ data }) => {
+interface Props {
+  data: any
+}
+
+const MoalCard = ({ data }: Props) => {
   return (
     <>
       <Modal.Header>{data.mission_name}</Modal.Header>
       <Modal.Body>
+        <Image
+          ml="5"
+          source={{ uri: data.links.mission_patch }}
+          w={200}
+          h={200}
+          alt="Patch"
+        />
         <Stack space="2" p="4">
           <Text color="gray.400"> 🚀 {data.rocket.rocket_name}</Text>
           <Text color="gray.400">📅 {data.launch_date_local}</Text>
@@ -56,9 +67,6 @@ const MoalCard = ({ data }) => {
           </Button>
         </HStack>
       </Modal.Body>
-      <Modal.Footer>
-        <Heading>hello</Heading>
-      </Modal.Footer>
 
       <Modal.CloseButton />
     </>

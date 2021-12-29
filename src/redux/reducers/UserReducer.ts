@@ -5,7 +5,10 @@ const initialState = {
   name: "",
 }
 
-const userReducer = (state = initialState, action) => {
+const userReducer = (
+  state = initialState,
+  action: { type: any; payload: any }
+) => {
   switch (action.type) {
     case USER_LOGIN: {
       const name = action.payload
