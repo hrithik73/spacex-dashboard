@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Box } from "native-base"
+import { Box, StatusBar } from "native-base"
 
 import CardContainer from "../components/CardContainer"
 import FilterByDate from "../components/filter-components/FilterByDate"
@@ -21,6 +21,7 @@ const HomeScreen = () => {
 
   return (
     <Box flex={1}>
+      <StatusBar backgroundColor="black" />
       <TimeLineFilter
         selectedTimeLine={selectedTimeLine}
         onPress={setSelectedTimeLine}
