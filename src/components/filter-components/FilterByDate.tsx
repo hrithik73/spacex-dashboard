@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Box, Button, HStack, VStack, Text, ChevronDownIcon } from "native-base"
 import RNDateTimePicker from "@react-native-community/datetimepicker"
-import { formateDate, initEndDate, initStartDate } from "../../utlis/utils"
+import { initEndDate, initStartDate } from "../../utlis/utils"
 import { Platform } from "react-native"
 
 interface AppProps {

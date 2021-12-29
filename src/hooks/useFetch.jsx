@@ -7,8 +7,6 @@ export const useFetch = () => {
   const [loading, setLoading] = useState(true)
   const initilUrl = `https://api.spacexdata.com/v3/launches`
 
-  // console.log(timeline)
-
   const fetchData = async (
     timeline,
     start = initStartDate,
@@ -16,7 +14,6 @@ export const useFetch = () => {
   ) => {
     let url = timeline === "All" ? initilUrl : initilUrl + `/${timeline}`
     url = url + `?start=${start}&end=${end}`
-    console.log(url)
 
     setLoading(true)
     try {

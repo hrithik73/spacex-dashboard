@@ -13,9 +13,7 @@ const HomeScreen = () => {
   const { data, loading, fetchData } = useFetch()
   const [startDate, setStartDate] = useState(initStartDate)
   const [endDate, setEndDate] = useState(initEndDate)
-
   const [flag, setFlag] = useState(false)
-  console.log(data)
 
   useEffect(() => {
     fetchData(selectedTimeLine, startDate, endDate)
