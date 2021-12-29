@@ -12,6 +12,7 @@ const userReducer = (
   switch (action.type) {
     case USER_LOGIN: {
       const name = action.payload
+      // console.log(name)
       // console.log("userReducer: USER_LOGIN: name: ", name)
       return {
         isLoggedIn: true,

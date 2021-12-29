@@ -12,7 +12,7 @@ import {
 } from "native-base"
 
 import { useNavigation } from "@react-navigation/core"
-import { Formik } from "formik"
+import { Formik, FormikHelpers } from "formik"
 import * as yup from "yup"
 import { auth } from "../../utlis/Fireabase"
 
@@ -44,7 +44,10 @@ export const SignUpScreen = () => {
       .required("Password is required"),
   })
 
-  const handleSignup = async (value, actions) => {
+  const handleSignup = async (
+    value: { name: any; email: any; password: any },
+    actions: FormikHelpers<{ name: string; email: string; password: string }>
+  ) => {
     const { name, email, password } = value
     // console.log({ value })
     try {
@@ -52,10 +55,9 @@ export const SignUpScreen = () => {
         email,
         password
       )
-      response.user.updateProfile({
-        displayName: name,
-      })
-      updateUser(response.user.displayName)
+      console.log(response.user)
+
+      updateUser(name)
     } catch (error) {
       actions.setFieldError("general", error.message)
       // console.log(error)

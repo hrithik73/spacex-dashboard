@@ -57,7 +57,7 @@ const Sidebar = (props: DrawerContentComponentProps) => {
           borderColor="secondary.500"
           borderWidth={3}
         >
-          {name.charAt(0).toUpperCase()}
+          {name === null ? "H" : name.charAt(0).toUpperCase()}
         </Avatar>
         <Heading mb={4} size="xl">
           {name}
