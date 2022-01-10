@@ -1,4 +1,4 @@
-# SpaceX Dashboard rocket
+# SpaceX Dashboard :rocket:
 
 ![Thumbnail](docs/mockup.png)
 
