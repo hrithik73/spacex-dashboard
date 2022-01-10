@@ -1,5 +1,5 @@
 import React from "react"
-import { NativeBaseProvider, Box } from "native-base"
+import { NativeBaseProvider } from "native-base"
 import AppNavigator from "./src/navigations"
 
 import { Provider as StoreProvider } from "react-redux"
