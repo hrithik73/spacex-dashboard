@@ -2,7 +2,7 @@
 
 ![Thumbnail](docs/mockup.png)
 
-Try the demo apk [here](https://expo.dev/accounts/hrithiksingh._/projects/spacex-dashboard/builds/c78adb4a-23f3-4094-a810-dfe726a1e7a5)
+Try the demo apk [here](https://turtle-v2-artifacts.s3.amazonaws.com/android/3d8adb92-75b0-4d49-a39b-7356b2726afb-0d12028626d344928b3a9ef17ab81a33.apk)
 
 ## Stack
 
