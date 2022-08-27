@@ -1,20 +1,16 @@
 import { NavigationContainer } from "@react-navigation/native"
 import AuthStack from "./AuthStack"
-import { ReducerType } from "../redux/reducers"
 
 import HomeNavigator from "./HomeNavigator"
 
-import { useSelector } from "react-redux"
+import { useAppSelector } from "../redux/store"
 
 const AppNavigator = () => {
-  const state = useSelector((state: ReducerType) => state.user)
-
-  console.log(state.isLoggedIn)
+  const { isLoggedIn } = useAppSelector((state) => state.user)
 
   return (
     <NavigationContainer>
-      {state.isLoggedIn ? <HomeNavigator /> : <AuthStack />}
-      {/* <HomeNavigator /> */}
+      {isLoggedIn ? <HomeNavigator /> : <AuthStack />}
     </NavigationContainer>
   )
 }

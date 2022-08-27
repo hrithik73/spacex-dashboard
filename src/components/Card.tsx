@@ -32,7 +32,7 @@ const Card = ({ data }: Props) => {
               {data.mission_name}
             </Heading>
             <Text color="gray.400"> 🚀 {data.rocket.rocket_name}</Text>
-            <Text color="gray.400">📅 {data.launch_date_local}</Text>
+            <Text color="gray.400"> 📅 {data.launch_date_local}</Text>
           </Stack>
           <HStack
             alignItems="center"

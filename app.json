@@ -14,11 +14,11 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "hr.spacex.com",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
